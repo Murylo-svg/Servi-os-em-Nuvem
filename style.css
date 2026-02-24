@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0c;
+    /* Fundo com padrão de grade cibernética */
+    background-image: 
+        linear-gradient(rgba(18, 16, 16, 0.9), rgba(18, 16, 16, 0.9)),
+        linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+        linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Rajdhani', sans-serif;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+/* Container Principal Estilo HUD */
+.anime-container {
+    background: rgba(20, 20, 25, 0.85);
+    border: 1px solid #3d3d4d;
+    padding: 40px;
+    position: relative;
+    width: 450px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(110, 0, 255, 0.1);
+    clip-path: polygon(0 5%, 5% 0, 100% 0, 100% 95%, 95% 100%, 0 100%); /* Cantos cortados estilo anime */
+}
+
+/* Detalhes de cantos neon */
+.corner-detail {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #7000ff;
+}
+.top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+.bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 0 10px #7000ff;
+}
+
+h1 span { color: #7000ff; }
+
+.status-bar {
+    width: 100%;
+    height: 4px;
+    background: #222;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.bar-fill {
+    width: 60%;
+    height: 100%;
+    background: #7000ff;
+    box-shadow: 0 0 10px #7000ff;
+}
+
+/* Inputs e Botões */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+input {
+    background: #121217;
+    border: 1px solid #3d3d4d;
+    padding: 12px;
+    color: #00ffcc; /* Verde neon para o texto digitado */
+    font-family: 'Orbitron', sans-serif;
+    outline: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+input:focus {
+    border-color: #7000ff;
+    box-shadow: 0 0 10px rgba(112, 0, 255, 0.5);
+}
+
+button {
+    background: transparent;
+    border: 1px solid #7000ff;
+    color: #7000ff;
+    padding: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background: #7000ff;
+    color: #fff;
+    box-shadow: 0 0 20px #7000ff;
+}
+
+/* Janela de Terminal (Resultado) */
+.terminal-window {
+    background: #0d0d12;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.terminal-header {
+    background: #1a1a24;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-family: 'Orbitron', sans-serif;
+    color: #777;
+    border-bottom: 1px solid #333;
+}
+
+.terminal-content {
+    padding: 15px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.result-item {
+    display: block;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #1a1a24;
+}
+
+.result-item b {
+    color: #7000ff;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-right: 10px;
+}

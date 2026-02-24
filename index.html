@@ -1,50 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta CEP - ViaCEP</title>
+    <title>CEP // SYSTEM_ACCESS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Consulta CEP - ViaCEP</h1>
-        <input type="text" id="cep" placeholder="Digite o CEP (8 dígitos)">
-        <button onclick="buscarCEP()">Buscar</button>
-        <div id="resultado"></div>
-    </div>
 
+    <div class="anime-container">
+        <!-- Detalhe decorativo no canto -->
+        <div class="corner-detail top-left"></div>
+        <div class="corner-detail bottom-right"></div>
+
+        <header>
+            <h1>CONSULTA_<span>CEP</span></h1>
+            <div class="status-bar">
+                <div class="bar-fill"></div>
+            </div>
+        </header>
+
+        <div class="input-group">
+            <input type="text" id="cep" placeholder="DIGITE O CÓDIGO..." maxlength="8">
+            <button onclick="buscarCEP()">BUSCAR</button>
+        </div>
+
+        <div id="resultado" class="terminal-window">
+            <div class="terminal-header">RESULTADO_LOG</div>
+            <div class="terminal-content">
+                <p>Aguardando entrada de dados...</p>
+            </div>
+        </div>
+    </div>
     <script>
-                 function buscarCEP() {
-    const cep = document.getElementById('cep').value;
+        async function buscarCEP() {
+    const cep = document.getElementById('cep').value.replace(/\D/g, '');
     const resultadoDiv = document.getElementById('resultado');
 
-    // Construir a URL da API ViaCEP
-    const url = `https://viacep.com.br/ws/${cep}/json/`;
+    if (cep.length !== 8) {
+        alert("Digite um CEP válido com 8 dígitos.");
+        return;
+    }
 
-    // Fazer a requisição usando fetch
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro na requisição: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.erro) {
-                resultadoDiv.innerHTML = '<p style="color: red;">CEP não encontrado.</p>';
-            } else {
-                resultadoDiv.innerHTML = `
-                    <p><strong>CEP:</strong> ${data.cep}</p>
-                    <p><strong>Logradouro:</strong> ${data.logradouro}</p>
-                    <p><strong>Bairro:</strong> ${data.bairro}</p>
-                    <p><strong>Cidade:</strong> ${data.localidade}</p>
-                    <p><strong>Estado:</strong> ${data.uf}</p>
-                `;
-            }
-        })
-        .catch(error => {
-            resultadoDiv.innerHTML = `<p style="color: red;">Erro ao buscar CEP: ${error.message}</p>`;
-        });
+    resultadoDiv.innerHTML = "Carregando...";
+
+    try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+            resultadoDiv.innerHTML = "<p style='color:#ff4d4d;'>[ERROR] CEP_NOT_FOUND</p>";
+        } else {
+            resultadoDiv.innerHTML = `
+                <div class="result-item"><b>LOGRADOURO:</b> ${data.logradouro}</div>
+                <div class="result-item"><b>BAIRRO:</b> ${data.bairro}</div>
+                <div class="result-item"><b>LOCALIDADE:</b> ${data.localidade} // ${data.uf}</div>
+                <div class="result-item" style="color:#00ffcc;"><b>STATUS:</b> CONNECTION_SUCCESS</div>
+            `;
+        }
+    } catch (error) {
+        resultadoDiv.innerHTML = "Erro ao buscar o CEP.";
+    }
 }
     </script>
 </body>

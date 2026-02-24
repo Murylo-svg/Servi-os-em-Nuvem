@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="anime-container">
         <!-- Detalhe decorativo no canto -->
         <div class="corner-detail top-left"></div>
@@ -31,35 +30,53 @@
                 <p>Aguardando entrada de dados...</p>
             </div>
         </div>
+        <div id="map-area" class="map-window" style="display: none;">
+            <div class="terminal-header">SATELLITE_VIEW // POS_TRACKING</div>
+            <div class="map-frame">
+                <iframe id="google-map" width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=""></iframe>
+                <div class="map-overlay"></div>
+            </div>
+        </div>
     </div>
     <script>
         async function buscarCEP() {
     const cep = document.getElementById('cep').value.replace(/\D/g, '');
-    const resultadoDiv = document.getElementById('resultado');
+    const resultadoDiv = document.querySelector('.terminal-content');
+    const mapArea = document.getElementById('map-area');
+    const mapIframe = document.getElementById('google-map');
 
     if (cep.length !== 8) {
-        alert("Digite um CEP válido com 8 dígitos.");
+        alert("SISTEMA: CÓDIGO INVÁLIDO. DIGITE 8 DÍGITOS.");
         return;
     }
 
-    resultadoDiv.innerHTML = "Carregando...";
+    resultadoDiv.innerHTML = "<p class='blink'>SCANNING_NETWORK...</p>";
 
     try {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         const data = await response.json();
 
         if (data.erro) {
-            resultadoDiv.innerHTML = "<p style='color:#ff4d4d;'>[ERROR] CEP_NOT_FOUND</p>";
+            resultadoDiv.innerHTML = "<p style='color:#ff4d4d;'>[ERROR] TARGET_NOT_FOUND</p>";
+            mapArea.style.display = 'none';
         } else {
+            // Atualiza o texto
             resultadoDiv.innerHTML = `
                 <div class="result-item"><b>LOGRADOURO:</b> ${data.logradouro}</div>
                 <div class="result-item"><b>BAIRRO:</b> ${data.bairro}</div>
                 <div class="result-item"><b>LOCALIDADE:</b> ${data.localidade} // ${data.uf}</div>
-                <div class="result-item" style="color:#00ffcc;"><b>STATUS:</b> CONNECTION_SUCCESS</div>
+                <div class="result-item" style="color:#00ffcc;"><b>STATUS:</b> SIGNAL_LOCKED</div>
             `;
+
+            // CONFIGURA O MAPA
+            const enderecoCompleto = `${data.logradouro}, ${data.bairro}, ${data.localidade}`;
+            const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(enderecoCompleto)}&t=k&z=16&ie=UTF8&iwloc=&output=embed`;
+            
+            mapIframe.src = mapUrl;
+            mapArea.style.display = 'block'; // Mostra a janela do mapa
         }
     } catch (error) {
-        resultadoDiv.innerHTML = "Erro ao buscar o CEP.";
+        resultadoDiv.innerHTML = "SYSTEM_FAILURE: CONNECTION_LOST";
     }
 }
     </script>

@@ -148,3 +148,143 @@ button:hover {
     font-size: 11px;
     margin-right: 10px;
 }
+/* Container do Radar */
+.radar-container {
+    position: relative;
+    width: 200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.radar {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(112, 0, 255, 0.05) 0%, rgba(0, 0, 0, 1) 100%);
+    border: 2px solid #333;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    box-shadow: 0 0 15px rgba(112, 0, 255, 0.2);
+}
+
+/* Anéis de escala */
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(112, 0, 255, 0.15);
+    border-radius: 50%;
+}
+.ring:nth-child(1) { width: 40px; height: 40px; }
+.ring:nth-child(2) { width: 80px; height: 80px; }
+.ring:nth-child(3) { width: 120px; height: 120px; }
+
+/* Linha de Varredura (Scanner) */
+.scan-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #7000ff);
+    transform-origin: left center;
+    animation: radar-beam 4s linear infinite;
+}
+
+@keyframes radar-beam {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* O Morcego (Ponto no Radar) */
+.bat-blip {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #00ffcc; /* Verde neon para destacar */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ffcc;
+    opacity: 0;
+    /* Animação do objeto se aproximando do centro */
+    animation: bat-approach 8s ease-in-out infinite;
+}
+
+@keyframes bat-approach {
+    0% { top: 10%; left: 10%; opacity: 0; transform: scale(0.5); }
+    20% { opacity: 1; }
+    50% { top: 40%; left: 35%; transform: scale(1.2); }
+    80% { opacity: 1; }
+    100% { top: 48%; left: 48%; opacity: 0; transform: scale(2); }
+}
+
+/* Onda de Sonar Pulsante */
+.sonar-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #7000ff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: sonar-pulse 2s linear infinite;
+    opacity: 0;
+}
+
+@keyframes sonar-pulse {
+    0% { width: 10px; height: 10px; opacity: 1; }
+    100% { width: 150px; height: 150px; opacity: 0; }
+}
+
+/* Legenda do Radar */
+.radar-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #7000ff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px #7000ff;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+.map-window {
+    margin-top: 20px;
+    background: #0d0d12;
+    border: 1px solid #7000ff;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: scanline-in 0.5s ease-out;
+}
+
+.map-frame {
+    position: relative;
+    line-height: 0;
+}
+
+/* Filtro dark para o mapa parecer mais "anime/cyberpunk" */
+#google-map {
+    filter: invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+    opacity: 0.8;
+}
+
+/* Overlay decorativo (linhas de scan) em cima do mapa */
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+    background-size: 100% 4px, 3px 100%;
+}
+
+@keyframes scanline-in {
+    from { height: 0; opacity: 0; }
+    to { height: 235px; opacity: 1; }
+}

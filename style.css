@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0c;
+    background-image: 
+        linear-gradient(rgba(18, 16, 16, 0.9), rgba(18, 16, 16, 0.9)),
+        linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+        linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Rajdhani', sans-serif;
+    color: #e0e0e0;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+}
+
+.logo {
+    margin-bottom: 50px;
+}
+
+.logo-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.logo h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 8px;
+    color: #fff;
+    text-shadow: 0 0 20px #7000ff, 0 0 40px #7000ff;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #00ffcc;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.tool-card {
+    background: rgba(20, 20, 25, 0.85);
+    border: 1px solid #3d3d4d;
+    padding: 40px 30px;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: 0.3s;
+    position: relative;
+    clip-path: polygon(0 5%, 5% 0, 100% 0, 100% 95%, 95% 100%, 0 100%);
+}
+
+.tool-card:hover {
+    border-color: #7000ff;
+    box-shadow: 0 0 30px rgba(112, 0, 255, 0.4);
+    transform: translateY(-5px);
+}
+
+.tool-card:hover .card-icon {
+    transform: scale(1.2);
+}
+
+.tool-card:hover .card-btn {
+    background: #7000ff;
+    color: #fff;
+    box-shadow: 0 0 20px #7000ff;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.tool-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.tool-card p {
+    font-size: 0.95rem;
+    color: #aaa;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.card-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid #7000ff;
+    color: #7000ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.footer {
+    color: #555;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.footer p {
+    font-family: 'Orbitron', sans-serif;
+}
+
+@media (max-width: 600px) {
+    .logo h1 {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

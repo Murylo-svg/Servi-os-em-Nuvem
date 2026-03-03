@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNPJ // SYSTEM_ACCESS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hamburger-menu">
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-links" id="menuLinks">
+            <a href="../CEPs/index.html">Consultar CEP</a>
+            <a href="index.html">Consultar CNPJ</a>
+        </div>
+    </div>
+
+    <div class="anime-container">
+        <div class="corner-detail top-left"></div>
+        <div class="corner-detail bottom-right"></div>
+        
+        <h1>CONSULTA_<span>CNPJ</span></h1>
+        <div class="status-bar">
+            <div class="bar-fill"></div>
+        </div>
+        
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="cnpjInput" 
+                placeholder="XX.XXX.XXX/XXXX-XX"
+                maxlength="18"
+                oninput="formatarCNPJ(this)"
+            >
+            <button onclick="buscarCNPJ()" id="btnBuscar">BUSCAR</button>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="radar-container">
+                <div class="radar">
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="scan-line"></div>
+                    <div class="sonar-wave"></div>
+                </div>
+                <div class="radar-label">SCANNING...</div>
+            </div>
+        </div>
+
+        <div id="error" class="error hidden">
+            <p id="errorMessage"></p>
+        </div>
+
+        <div id="result" class="terminal-window hidden">
+            <div class="terminal-header">
+                EMPRESA ENCONTRADA
+            </div>
+            <div class="terminal-content">
+                <span class="result-item"><b>Nome</b> <span id="nome"></span></span>
+                <span class="result-item"><b>CNPJ</b> <span id="cnpj"></span></span>
+                <span class="result-item"><b>Razão Social</b> <span id="razaoSocial"></span></span>
+                <span class="result-item"><b>Fantasia</b> <span id="nomeFantasia"></span></span>
+                <span class="result-item"><b>Abertura</b> <span id="dataAbertura"></span></span>
+                <span class="result-item"><b>Situação</b> <span id="situacao"></span></span>
+                <span class="result-item"><b>Tipo</b> <span id="tipo"></span></span>
+                <span class="result-item"><b>Porte</b> <span id="porte"></span></span>
+                <span class="result-item"><b>Capital</b> <span id="capitalSocial"></span></span>
+                <span class="result-item"><b>Endereço</b> <span id="endereco"></span></span>
+                <span class="result-item"><b>Cidade</b> <span id="cidade"></span></span>
+                <span class="result-item"><b>UF</b> <span id="uf"></span></span>
+                <span class="result-item"><b>Telefone</b> <span id="telefone"></span></span>
+                <span class="result-item"><b>Email</b> <span id="email"></span></span>
+                <span class="result-item"><b>Atividade</b> <span id="atividadePrincipal"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('menuLinks').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
+
